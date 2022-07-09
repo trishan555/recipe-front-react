@@ -44,7 +44,7 @@ const Popular = () => {
 
     return (
         <Wrapper>
-            <h3>Popular Items</h3>
+            <h3>Popular Picks</h3>
             <Splide
                 options={{
                     perPage: 4,
@@ -100,7 +100,7 @@ const Card = styled.div`
         font-weight: 600;
         text-align: center;
         left: 50%;
-        bottom: 0;
+        bottom: 10%;
         transform: translate(-50%, 0);
     }
 `
