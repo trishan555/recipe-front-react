@@ -1,4 +1,7 @@
 import { useEffect, useState } from 'react'
+import styled from 'styled-components'
+import { Splide, SplideSlide } from '@splidejs/react-splide'
+import '@splidejs/react-splide/css'
 
 const Popular = () => {
     const [popular, setPopular] = useState([])
@@ -6,6 +9,8 @@ const Popular = () => {
     useEffect(() => {
         fetchData()
     }, [])
+
+    //this is also correct
 
     // const fetchData = () => {
     //     fetch(
@@ -21,22 +26,91 @@ const Popular = () => {
     // }
 
     const fetchData = async () => {
-        const response = await fetch(
-            `https://api.spoonacular.com/recipes/random?apiKey=${process.env.REACT_APP_API_KEY}&number=9`
-        )
-        const data = await response.json()
-        setPopular(data.recipes)
+        //limit the api request
+        const check = localStorage.getItem('popular')
+
+        if (check) {
+            setPopular(JSON.parse(check))
+        } else {
+            const response = await fetch(
+                `https://api.spoonacular.com/recipes/random?apiKey=${process.env.REACT_APP_API_KEY}&number=9`
+            )
+            const data = await response.json()
+            localStorage.setItem('popular', JSON.stringify(data.recipes))
+            setPopular(data.recipes)
+            console.log(data.recipes)
+        }
     }
 
     return (
-        <div>
-            <ul>
+        <Wrapper>
+            <h3>Popular Items</h3>
+            <Splide
+                options={{
+                    perPage: 4,
+                    gap: '2rem',
+                    pagination: false,
+                    arrows: false,
+                    drag: 'free',
+                }}
+            >
                 {popular.map((recipe) => {
-                    return <li key={recipe.id}>{recipe.title}</li>
+                    return (
+                        <SplideSlide>
+                            <Card key={recipe.id}>
+                                <p>{recipe.title}</p>
+                                <img src={recipe.image} alt={recipe.title} />
+                                <Gradiant />
+                            </Card>
+                        </SplideSlide>
+                    )
                 })}
-            </ul>
-        </div>
+            </Splide>
+        </Wrapper>
     )
 }
+
+const Wrapper = styled.div`
+    margin: 4rem 0rem;
+`
+
+const Card = styled.div`
+    min-height: 20rem;
+    border-radius: 2rem;
+    overflow: hidden;
+    position: relative;
+
+    img {
+        border-radius: 2rem;
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        object-fit: cover;
+        /* height: auto; */
+    }
+
+    p {
+        z-index: 10;
+        color: white;
+        /* display: flex;
+        justify-content: center;
+        align-items: center; */
+        position: absolute;
+        font-size: 1rem;
+        font-weight: 600;
+        text-align: center;
+        left: 50%;
+        bottom: 0;
+        transform: translate(-50%, 0);
+    }
+`
+
+const Gradiant = styled.div`
+    z-index: 3;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5));
+`
 
 export default Popular
