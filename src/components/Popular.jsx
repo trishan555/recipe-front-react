@@ -56,8 +56,8 @@ const Popular = () => {
             >
                 {popular.map((recipe) => {
                     return (
-                        <SplideSlide>
-                            <Card key={recipe.id}>
+                        <SplideSlide key={recipe.id}>
+                            <Card>
                                 <p>{recipe.title}</p>
                                 <img src={recipe.image} alt={recipe.title} />
                                 <Gradiant />
