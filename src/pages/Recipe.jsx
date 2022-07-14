@@ -30,9 +30,9 @@ const Recipe = () => {
             <DetailWrapper>
                 <div>
                     <h3>{details.title}</h3>
-                    <img src={details.image} alt={details.title} />
+                    <Image src={details.image} alt={details.title} />
                 </div>
-                <div>
+                <Info>
                     <Button
                         className={activeTab === 'instructions' ? 'active' : ''}
                         onClick={() => setActiveTab('instructions')}
@@ -67,7 +67,7 @@ const Recipe = () => {
                             })}
                         </ul>
                     )}
-                </div>
+                </Info>
             </DetailWrapper>
         </div>
     )
@@ -75,7 +75,9 @@ const Recipe = () => {
 
 const DetailWrapper = styled.div`
     margin-top: 3rem;
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+    grid-gap: 3rem;
 
     .active {
         background: linear-gradient(35deg, #494949, #313131);
@@ -90,4 +92,30 @@ const Button = styled.button`
     padding: 1rem 2rem;
     font-weight: 700;
 `
+
+const Image = styled.img`
+    max-width: 100%;
+    border-radius: 2rem;
+`
+
+const Info = styled.div`
+    font-weight: 400;
+
+    p {
+        margin: 2rem 0rem;
+    }
+
+    ul {
+        margin: 2rem 0rem;
+    }
+
+    li {
+        margin-bottom: 0.5rem;
+    }
+
+    a {
+        text-decoration: none;
+    }
+`
+
 export default Recipe
