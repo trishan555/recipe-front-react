@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 // import { motion } from 'framer-motion'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import Category from '../components/Category'
 
 const Cuisine = () => {
@@ -37,8 +37,13 @@ const Cuisine = () => {
                     {cuisines.map((cuisine) => {
                         return (
                             <Card id={cuisine.id}>
-                                <img src={cuisine.image} alt={cuisine.title} />
-                                <p>{cuisine.title}</p>
+                                <Link to={'/recipe/' + cuisine.id}>
+                                    <img
+                                        src={cuisine.image}
+                                        alt={cuisine.title}
+                                    />
+                                    <p>{cuisine.title}</p>
+                                </Link>
                             </Card>
                         )
                     })}
@@ -63,6 +68,12 @@ const Card = styled.div`
     p {
         text-align: center;
         padding: 1rem;
+        font-weight: 500;
+        font-size: 0.8rem;
+    }
+    a {
+        text-decoration: none;
+        color: black;
     }
 `
 

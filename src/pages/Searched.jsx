@@ -56,6 +56,8 @@ const Card = styled.div`
     p {
         text-align: center;
         padding: 1rem;
+        font-weight: 500;
+        font-size: 0.8rem;
     }
 `
 

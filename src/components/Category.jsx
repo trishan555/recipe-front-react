@@ -40,7 +40,8 @@ const SLink = styled(NavLink)`
     justify-content: center;
     align-items: center;
     border-radius: 50%;
-    margin-right: 2rem;
+    margin-right: 1.5rem;
+
     text-decoration: none;
     background-color: #2a3232;
     width: 4rem;
