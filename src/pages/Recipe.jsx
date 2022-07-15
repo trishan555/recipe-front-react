@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import Category from '../components/Category'
-import Search from '../components/Search'
 import styled from 'styled-components'
 
 const Recipe = () => {
@@ -18,18 +16,14 @@ const Recipe = () => {
         )
         const data = await response.json()
         setDetails(data)
-        console.log(data)
+        //console.log(data)
     }
 
     return (
         <div>
-            <div>
-                <Search />
-                <Category />
-            </div>
+            <h3>{details.title}</h3>
             <DetailWrapper>
                 <div>
-                    <h3>{details.title}</h3>
                     <Image src={details.image} alt={details.title} />
                 </div>
                 <Info>
@@ -74,7 +68,7 @@ const Recipe = () => {
 }
 
 const DetailWrapper = styled.div`
-    margin-top: 3rem;
+    margin-top: 2rem;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
     grid-gap: 3rem;
@@ -91,6 +85,7 @@ const Button = styled.button`
     background-color: white;
     padding: 1rem 2rem;
     font-weight: 700;
+    border-radius: 1rem;
 `
 
 const Image = styled.img`
@@ -114,6 +109,7 @@ const Info = styled.div`
     }
 
     a {
+        color: black;
         text-decoration: none;
     }
 `

@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import Category from '../components/Category'
-import Search from '../components/Search'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 const Searched = () => {
@@ -23,16 +21,14 @@ const Searched = () => {
     }
     return (
         <div>
-            <div>
-                <Search />
-                <Category />
-            </div>
             <Grid>
                 {searchedRecipes.map((item) => {
                     return (
                         <Card>
-                            <img src={item.image} alt={item.title} />
-                            <p>{item.title}</p>
+                            <Link to={'/recipe/' + item.id}>
+                                <img src={item.image} alt={item.title} />
+                                <p>{item.title}</p>
+                            </Link>
                         </Card>
                     )
                 })}
@@ -51,6 +47,11 @@ const Card = styled.div`
     img {
         width: 100%;
         border-radius: 2rem;
+    }
+
+    a {
+        text-decoration: none;
+        color: black;
     }
 
     p {

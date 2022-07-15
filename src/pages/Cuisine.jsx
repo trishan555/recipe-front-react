@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
-// import { motion } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { useParams, Link } from 'react-router-dom'
-import Category from '../components/Category'
 
 const Cuisine = () => {
     const [cuisines, setCuisines] = useState([])
@@ -25,30 +24,22 @@ const Cuisine = () => {
     }
     return (
         <div>
-            <div>
-                <Category />
-            </div>
-            <div>
-                <h3>
-                    {params.type.charAt(0).toUpperCase() + params.type.slice(1)}{' '}
-                    Cuisines
-                </h3>
-                <Grid>
-                    {cuisines.map((cuisine) => {
-                        return (
-                            <Card id={cuisine.id}>
-                                <Link to={'/recipe/' + cuisine.id}>
-                                    <img
-                                        src={cuisine.image}
-                                        alt={cuisine.title}
-                                    />
-                                    <p>{cuisine.title}</p>
-                                </Link>
-                            </Card>
-                        )
-                    })}
-                </Grid>
-            </div>
+            <h3>
+                {params.type.charAt(0).toUpperCase() + params.type.slice(1)}{' '}
+                Cuisines
+            </h3>
+            <Grid>
+                {cuisines.map((cuisine) => {
+                    return (
+                        <Card id={cuisine.id}>
+                            <Link to={'/recipe/' + cuisine.id}>
+                                <img src={cuisine.image} alt={cuisine.title} />
+                                <p>{cuisine.title}</p>
+                            </Link>
+                        </Card>
+                    )
+                })}
+            </Grid>
         </div>
     )
 }
